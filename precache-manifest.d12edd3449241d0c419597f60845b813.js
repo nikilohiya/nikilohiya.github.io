@@ -1,39 +1,39 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6711e4849647877a2436acd19ad68db2",
+    "revision": "15026fadc9dafa817c3b97403e5ccced",
     "url": "/index.html"
   },
   {
-    "revision": "811cc6805345a9d243e4",
+    "revision": "e9d41649920aed2a2bd0",
     "url": "/static/css/3.3a26ebde.chunk.css"
   },
   {
-    "revision": "88dda0d9c20cacf182bc",
+    "revision": "0b564214975552d1c855",
     "url": "/static/css/4.ee2a0142.chunk.css"
   },
   {
-    "revision": "70f760a04ed751a7ce6c",
+    "revision": "cf0e5bafc9e9156caa6d",
     "url": "/static/css/main.39a8036f.chunk.css"
   },
   {
-    "revision": "d869db3051d8efad1676",
-    "url": "/static/js/2.dfbcd12a.chunk.js"
+    "revision": "49f4147de149df06b89f",
+    "url": "/static/js/2.2720dc45.chunk.js"
   },
   {
-    "revision": "811cc6805345a9d243e4",
-    "url": "/static/js/3.39841bdb.chunk.js"
+    "revision": "e9d41649920aed2a2bd0",
+    "url": "/static/js/3.54b7183d.chunk.js"
   },
   {
-    "revision": "88dda0d9c20cacf182bc",
-    "url": "/static/js/4.a438e196.chunk.js"
+    "revision": "0b564214975552d1c855",
+    "url": "/static/js/4.1a5165c0.chunk.js"
   },
   {
-    "revision": "70f760a04ed751a7ce6c",
-    "url": "/static/js/main.92d57819.chunk.js"
+    "revision": "cf0e5bafc9e9156caa6d",
+    "url": "/static/js/main.eb15e787.chunk.js"
   },
   {
-    "revision": "86d807fbca0ee93d4f07",
-    "url": "/static/js/runtime-main.352bd7c4.js"
+    "revision": "0cf304498afafc1e3ad1",
+    "url": "/static/js/runtime-main.7f0a5535.js"
   },
   {
     "revision": "21f233e19402cc4a66866a7f31191f0d",
@@ -56,16 +56,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/UsereadyLogo.ebea6678.png"
   },
   {
-    "revision": "c59720d63dc3595a12e1c7e641a1bfa5",
-    "url": "/static/media/airbnbLogo.c59720d6.png"
-  },
-  {
     "revision": "24eb01451915118357e9bec71155c74f",
     "url": "/static/media/artstreakLogo.24eb0145.png"
   },
   {
     "revision": "d13e9a5b5c0e9faab40d19fe41f0e08e",
     "url": "/static/media/asservicesLogo.d13e9a5b.png"
+  },
+  {
+    "revision": "fef0848d8dee31cee52e21f22d6cbeab",
+    "url": "/static/media/bigquery.fef0848d.png"
   },
   {
     "revision": "47a7a717679b640ceb1b05d38c480a61",
@@ -84,20 +84,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/developerActivity.59389695.svg"
   },
   {
-    "revision": "8ddf76a14a2e3ad3ba62b46d49a75a74",
-    "url": "/static/media/facebookLogo.8ddf76a1.png"
-  },
-  {
     "revision": "c24ba79111a90758a3a472a906ab2901",
     "url": "/static/media/googleAssistant.c24ba791.svg"
-  },
-  {
-    "revision": "e79c639294c805688be731921368c8f8",
-    "url": "/static/media/googleAssistantLogo.e79c6392.webp"
-  },
-  {
-    "revision": "83a05b10639d238bd8c5bbab279ab911",
-    "url": "/static/media/harvardLogo.83a05b10.png"
   },
   {
     "revision": "b05ae5b575a7e1125610944dc152c35f",
@@ -124,24 +112,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/oracleLogo.846bf33c.png"
   },
   {
+    "revision": "45b6b11fbac23b8aeee97c92234a4de3",
+    "url": "/static/media/power_bi.45b6b11f.png"
+  },
+  {
     "revision": "c1a95f7335cbfb730b937e19e8830a53",
     "url": "/static/media/programmer.c1a95f73.svg"
   },
   {
-    "revision": "1a60e8a9e2c2d6a539c7692f27fe6790",
-    "url": "/static/media/pwa.1a60e8a9.webp"
+    "revision": "372b12ffef9a0fedb0c40e912d3f452d",
+    "url": "/static/media/python.372b12ff.jpg"
   },
   {
-    "revision": "ee62cb58630f29a6e6201b49d4c03728",
-    "url": "/static/media/pwaLogo.ee62cb58.webp"
-  },
-  {
-    "revision": "4b2938b9f5ea2f1ddbd45dccaff628bc",
-    "url": "/static/media/quoraLogo.4b2938b9.png"
+    "revision": "9e42c14354f1949f0ab6e91b2c8c2851",
+    "url": "/static/media/qlik.9e42c143.png"
   },
   {
     "revision": "25018d29d5ab115bc51c3e9a2d92f90f",
     "url": "/static/media/saayaHealthLogo.25018d29.webp"
+  },
+  {
+    "revision": "9d28eea11f448456602cce78985aeac2",
+    "url": "/static/media/sisense.9d28eea1.jpg"
   },
   {
     "revision": "3440939881da8339d1597e8d77cdf850",
