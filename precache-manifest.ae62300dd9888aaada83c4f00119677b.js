@@ -1,39 +1,39 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "15026fadc9dafa817c3b97403e5ccced",
+    "revision": "7aef216b1e6884719ada9652bb25577f",
     "url": "/index.html"
   },
   {
-    "revision": "e9d41649920aed2a2bd0",
+    "revision": "e3629716591771fda151",
     "url": "/static/css/3.3a26ebde.chunk.css"
   },
   {
-    "revision": "0b564214975552d1c855",
+    "revision": "948f2eeea78c1644781b",
     "url": "/static/css/4.ee2a0142.chunk.css"
   },
   {
-    "revision": "cf0e5bafc9e9156caa6d",
-    "url": "/static/css/main.39a8036f.chunk.css"
+    "revision": "988f36401ef68ddf6e17",
+    "url": "/static/css/main.e60b9cd8.chunk.css"
   },
   {
-    "revision": "49f4147de149df06b89f",
-    "url": "/static/js/2.2720dc45.chunk.js"
+    "revision": "57d41b2f06a300e7cbc1",
+    "url": "/static/js/2.0def7e21.chunk.js"
   },
   {
-    "revision": "e9d41649920aed2a2bd0",
-    "url": "/static/js/3.54b7183d.chunk.js"
+    "revision": "e3629716591771fda151",
+    "url": "/static/js/3.e396319c.chunk.js"
   },
   {
-    "revision": "0b564214975552d1c855",
-    "url": "/static/js/4.1a5165c0.chunk.js"
+    "revision": "948f2eeea78c1644781b",
+    "url": "/static/js/4.1162d226.chunk.js"
   },
   {
-    "revision": "cf0e5bafc9e9156caa6d",
-    "url": "/static/js/main.eb15e787.chunk.js"
+    "revision": "988f36401ef68ddf6e17",
+    "url": "/static/js/main.692c0bc3.chunk.js"
   },
   {
-    "revision": "0cf304498afafc1e3ad1",
-    "url": "/static/js/runtime-main.7f0a5535.js"
+    "revision": "3cd194a52a0042cca8f3",
+    "url": "/static/js/runtime-main.e53d3354.js"
   },
   {
     "revision": "21f233e19402cc4a66866a7f31191f0d",
@@ -52,6 +52,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Montserrat-Regular.ee653992.ttf"
   },
   {
+    "revision": "5ee31c55e8d52b00bbae4f6c57815313",
+    "url": "/static/media/R_logo.5ee31c55.png"
+  },
+  {
+    "revision": "6d59d002c631ec1ddffca8b977d24abe",
+    "url": "/static/media/Snowflake.6d59d002.png"
+  },
+  {
     "revision": "ebea6678425788017da4e8e031466924",
     "url": "/static/media/UsereadyLogo.ebea6678.png"
   },
@@ -62,6 +70,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d13e9a5b5c0e9faab40d19fe41f0e08e",
     "url": "/static/media/asservicesLogo.d13e9a5b.png"
+  },
+  {
+    "revision": "3fa4acd54503801c4a174868e990ba02",
+    "url": "/static/media/aws.3fa4acd5.png"
   },
   {
     "revision": "fef0848d8dee31cee52e21f22d6cbeab",
@@ -138,6 +150,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "3440939881da8339d1597e8d77cdf850",
     "url": "/static/media/skill.34409398.svg"
+  },
+  {
+    "revision": "476f81a19db94f15fec396171c34239a",
+    "url": "/static/media/sqlserver.476f81a1.png"
   },
   {
     "revision": "3b758ef56d398145542e137daa28e392",
