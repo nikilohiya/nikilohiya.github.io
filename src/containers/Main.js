@@ -48,14 +48,9 @@ export default class Main extends Component {
           <StackProgress />
           <Education />
           <WorkExperience />
-          <Projects />
-          <StartupProject />
-          <Achievement />
-          <Blogs />
-          <Talks />
-          <Twitter />
-          <Podcast />
-          <Profile />
+                <StartupProject />
+                <Achievement />
+                <Contact />
           <Footer />
           <Top />
         </StyleProvider>
@@ -63,3 +58,8 @@ export default class Main extends Component {
     );
   }
 }
+          //<Blogs />
+          //<Talks />
+          //<Twitter />
+          //<Podcast />
+          //<Projects /> 

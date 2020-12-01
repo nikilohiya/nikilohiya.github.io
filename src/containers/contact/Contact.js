@@ -4,6 +4,7 @@ import SocialMedia from "../../components/socialMedia/SocialMedia";
 import { contactInfo } from "../../portfolio";
 import { Fade } from "react-reveal";
 import StyleContext from "../../contexts/StyleContext";
+import emoji from "react-easy-emoji"
 
 export default function Contact() {
   const { isDark } = useContext(StyleContext);

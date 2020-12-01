@@ -30,7 +30,6 @@ export default function Profile() {
         user(login:"${openSource.githubUserName}") { 
           name
           bio
-          isHireable
           avatarUrl
           location
         }
