@@ -1,39 +1,39 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4c56011963bb27adbc10b6f52eef20cb",
+    "revision": "465086bfda0104f8c3af1cd949e20177",
     "url": "/index.html"
   },
   {
-    "revision": "e3629716591771fda151",
+    "revision": "9bae0d48f0c6ef22c972",
     "url": "/static/css/3.3a26ebde.chunk.css"
   },
   {
-    "revision": "948f2eeea78c1644781b",
+    "revision": "215bc829fa6eb3679bb3",
     "url": "/static/css/4.ee2a0142.chunk.css"
   },
   {
-    "revision": "61281de2d460d0f77485",
+    "revision": "5a950b78a281e9a62c56",
     "url": "/static/css/main.d85e7fc3.chunk.css"
   },
   {
-    "revision": "57d41b2f06a300e7cbc1",
-    "url": "/static/js/2.0def7e21.chunk.js"
+    "revision": "68327b6eb11d2f2fd6a2",
+    "url": "/static/js/2.d3b426a8.chunk.js"
   },
   {
-    "revision": "e3629716591771fda151",
-    "url": "/static/js/3.e396319c.chunk.js"
+    "revision": "9bae0d48f0c6ef22c972",
+    "url": "/static/js/3.4befccf6.chunk.js"
   },
   {
-    "revision": "948f2eeea78c1644781b",
-    "url": "/static/js/4.1162d226.chunk.js"
+    "revision": "215bc829fa6eb3679bb3",
+    "url": "/static/js/4.16e1adf3.chunk.js"
   },
   {
-    "revision": "61281de2d460d0f77485",
-    "url": "/static/js/main.51be0bb8.chunk.js"
+    "revision": "5a950b78a281e9a62c56",
+    "url": "/static/js/main.0181aae9.chunk.js"
   },
   {
-    "revision": "3cd194a52a0042cca8f3",
-    "url": "/static/js/runtime-main.e53d3354.js"
+    "revision": "5c26edf47a501a5d730f",
+    "url": "/static/js/runtime-main.8e105129.js"
   },
   {
     "revision": "21f233e19402cc4a66866a7f31191f0d",
@@ -162,6 +162,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "03b5a61cefe63af3215f1b5c5c602b96",
     "url": "/static/media/stevensLogo.03b5a61c.png"
+  },
+  {
+    "revision": "a8ed8e0eb0a0c414b80c5b5012bbf69c",
+    "url": "/static/media/tableaucertifiedlogo.a8ed8e0e.png"
   },
   {
     "revision": "39eff4a91b01e00a32cb78f3797eec88",
