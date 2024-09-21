@@ -1,5 +1,5 @@
 ---
-title:  "AI Trends in 2024!"
+title:  "What is Langgraph and Multi Agent Systems?"
 layout: post
 author_profile: true
 ---
