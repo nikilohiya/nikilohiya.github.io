@@ -1,10 +1,12 @@
 ---
-layout: posts
+layout: "posts"
 title: "The Rise of Multi-Agent Systems: A Deep Dive into CrewAI"
-date: 2024-10-26
-categories: AI-Engineering
-tags: [AI, Multi-Agent Systems, CrewAI, LangChain, Generative AI]
+# date: "2024-10-26"
+categories: "AI-Engineering"
+tags: ["AI", "Multi-Agent Systems", "CrewAI", "LangChain", "LLMs", "Generative AI"]
 ---
+
+# The Rise of Multi-Agent Systems: A Deep Dive into CrewAI
 
 ## Introduction
 
