@@ -12,7 +12,7 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 remote_theme             : "mmistakes/minimal-mistakes@4.26.2"
-minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "default"
+minimal_mistakes_skin    : "aqua" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "default"
 
 # Site Settings
 locale                   : "en-US"
@@ -114,7 +114,7 @@ analytics:
 # Site Author
 author:
   name             : "Nikhil"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/Avatar.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Hello World."
   location         : "Seattle"
   email            :
@@ -140,6 +140,7 @@ author:
 
 # Site Footer
 footer:
+  follow_feed: false
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"

@@ -6,8 +6,6 @@ categories: "AI-Engineering"
 tags: ["AI", "Multi-Agent Systems", "CrewAI", "LangChain", "LLMs", "Generative AI"]
 ---
 
-# The Rise of Multi-Agent Systems: A Deep Dive into CrewAI
-
 ## Introduction
 
 The landscape of AI is rapidly evolving, with the rise of large language models (LLMs) ushering in a new era of intelligent applications.  However,  single-agent LLMs often struggle with complex tasks that require reasoning, planning, and collaboration.  Enter multi-agent systems (MAS), a powerful paradigm that empowers multiple AI agents to work together, each specializing in a distinct role, to achieve a common goal. 
