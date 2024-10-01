@@ -1,11 +1,8 @@
 ---
-layout: "posts"
+layout: "splash"
 title: "LangGraph: Building Resilient Language Agents as Graphs"
 categories: "AI-Engineering"
 ---
-
-# LangGraph: Building Resilient Language Agents as Graphs
-
 ## Introduction
 
 LangGraph is a powerful library designed to build stateful, multi-actor applications using Large Language Models (LLMs).  It excels in creating agent and multi-agent workflows, offering key advantages over traditional LLM frameworks. 
