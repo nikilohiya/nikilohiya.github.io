@@ -1,205 +1,88 @@
 ---
 layout: "splash"
-title: "LangGraph: Building Resilient Language Agents as Graphs"
+title: "Contextual Retrieval: Enhancing Retrieval-Augmented Generation with Semantic Context"
 categories: "AI-Engineering"
 ---
+
+# Contextual Retrieval: Enhancing Retrieval-Augmented Generation with Semantic Context
+
 ## Introduction
 
-LangGraph is a powerful library designed to build stateful, multi-actor applications using Large Language Models (LLMs).  It excels in creating agent and multi-agent workflows, offering key advantages over traditional LLM frameworks. 
+Retrieval-Augmented Generation (RAG) has become a cornerstone of AI systems seeking to leverage external knowledge bases for more comprehensive and context-aware responses.  However, traditional RAG approaches often suffer from context loss, particularly when documents are split into smaller chunks for efficient retrieval.  This can hinder the ability of AI models to effectively interpret and utilize retrieved information.  In this post, we delve into Anthropic's novel approach to contextual retrieval, which significantly enhances retrieval accuracy by prepending chunk-specific explanatory context. 
 
-LangGraph focuses on:
+## The Challenge of Context Loss in RAG
 
-* **Cycles:** LangGraph allows you to define workflows with cycles, a critical feature for most agentic architectures, setting it apart from solutions based on directed acyclic graphs (DAGs).
-* **Controllability:**  The library provides fine-grained control over both the flow and state of your application, crucial for building reliable agents.
-* **Persistence:** LangGraph includes built-in persistence, enabling advanced human-in-the-loop features and memory capabilities.
+Consider a scenario where an AI system is tasked with retrieving information from a knowledge base containing financial reports.  A user might pose the query: "What was the revenue growth for ACME Corp in Q2 2023?".  A relevant chunk might contain the text: "The company's revenue grew by 3% over the previous quarter."  However, without additional context, it's difficult to determine which company this chunk refers to or the specific time period.  This lack of context can lead to retrieval failures and inaccurate responses from the AI model.
 
-Inspired by Pregel and Apache Beam, LangGraph leverages NetworkX for its public interface. While created by LangChain Inc., the creators of LangChain, LangGraph can be utilized independently. 
+## Contextual Retrieval: Preserving Semantic Meaning
 
-This blog post delves into the core concepts of LangGraph and demonstrates its practical application in creating resilient and adaptable language agents.
+Anthropic's Contextual Retrieval addresses this issue by introducing two key sub-techniques:
 
-##  State Management in LangGraph
+* **Contextual Embeddings:**  Each chunk is augmented with a concise, explanatory context derived from the overall document.  This context provides crucial information about the chunk's origin and relevance, ensuring that the semantic meaning is preserved during retrieval.
 
-One of the central concepts of LangGraph is **state**.  Each execution of a LangGraph generates a state, which is passed between nodes in the graph as they execute. Each node updates this internal state using its return value.
+* **Contextual BM25:**  Traditional BM25 (Best Matching 25) is a ranking function that utilizes lexical matching to identify precise word or phrase matches.  Contextual BM25 extends this approach by incorporating the enriched context provided by Contextual Embeddings. This hybrid approach allows for both semantic and lexical matching, leading to more accurate retrieval results.
 
-The state update mechanism is determined by:
+## Implementing Contextual Retrieval
 
-* The type of graph selected
-* A custom function defined by the user
-
-## A Simple Example: Agent with a Search Tool
-
-Let's consider a simple agent that uses a search tool.  This agent maintains a conversation history, adding each message to its state.  
+To implement Contextual Retrieval, Anthropic leverages their Claude language model and its prompt caching functionality.  A prompt is used to instruct Claude to generate concise, chunk-specific context that explains the chunk within the context of the overall document.
 
 ```python
-from langchain.llms import OpenAI
-from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
-from langgraph.graph import StateGraph, START, END
-from langgraph.prebuilt import ToolNode
-from langgraph.nodes import AgentNode
-from langchain_core.messages import AIMessage, HumanMessage
-
-# Initialize LLM and memory
-llm = OpenAI(temperature=0)
-memory = ConversationBufferMemory()
-
-# Define an agent node
-def agent_node(state, agent, name):
-    result = agent.invoke(state)
-    return {
-        "messages": [result],  # Add the result to the state
-        "sender": name,       # Track the sender
-    }
-
-# Create the agent
-agent = ConversationChain(llm=llm, memory=memory)
-
-# Define the graph
-graph = StateGraph(initial_state={"messages": []})  # Start with an empty message list
-
-# Add the agent node as the entry point
-graph.add_node("agent", AgentNode(agent_node, agent=agent, name="agent"))
-
-# Add a tool node (e.g., a search tool)
-graph.add_node("search", ToolNode(search_tool)) 
-
-# Define conditional edges
-graph.add_conditional_edges(
-    "agent",  
-    lambda state: "tool_call" in state["messages"][-1].tool_calls,  # Check for tool calls
-    {"tool_call": "search", "end": END}, 
-)
-
-# Route tool calls back to the agent
-graph.add_conditional_edges("search", lambda state: state["sender"], {"agent": "agent"})
-
-# Connect the start node to the agent
-graph.add_edge(START, "agent")
-
-# Run the graph
-result = graph.run({"messages": [HumanMessage(content="What is the capital of France?")]})
-
-# Output the final conversation state
-print(result) 
+# Example Claude prompt for generating contextual information
+context_prompt = """<document>
+{{WHOLE_DOCUMENT}}
+</document>
+Here is the chunk we want to situate within the whole document
+<chunk>
+{{CHUNK_CONTENT}}
+</chunk>
+Please give a short succinct context to situate this chunk within the overall document for the purposes of improving search retrieval of the chunk. Answer only with the succinct context and nothing else.
+"""
 ```
 
-In this example, the agent receives a message, adds it to its state, and invokes the LLM. If the LLM requires a tool call, the graph routes execution to the "search" node.  Upon completion of the tool call, the graph returns to the agent. The process continues until there are no more tool calls, at which point the graph completes and returns the final state.
+This contextual text is then prepended to the original chunk before embedding and indexing.
 
+## Performance Enhancements
 
-## Multi-Agent Collaboration
+Anthropic's experiments across various knowledge domains demonstrate the significant benefits of Contextual Retrieval.  They observed a 49% reduction in failed retrievals using the combined approach of Contextual Embeddings and Contextual BM25. Furthermore, adding a reranking step, which further prioritizes relevant chunks, led to an impressive 67% reduction in failed retrievals.
 
-LangGraph excels in handling multi-agent systems.  Let's consider a scenario involving two agents:
+## Implementation Considerations
 
-* **Generator:** Generates research questions
-* **Executor:** Finds relevant information for each question
+When implementing Contextual Retrieval, several key considerations are important:
 
-The graph structure would be:
+* **Chunk Size and Boundaries:** The choice of chunk size and boundaries can significantly impact retrieval performance.  Carefully evaluate your knowledge base and choose chunk sizes that provide sufficient context while remaining manageable.
 
-```python
-from langgraph.graph import StateGraph, START, END
-from langgraph.prebuilt import ToolNode
-from langgraph.nodes import AgentNode
-from langchain.llms import OpenAI
-from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
+* **Embedding Models:**  Selecting appropriate embedding models is crucial for effective semantic matching.  Anthropic recommends models like Gemini or Voyage.
 
-# Initialize LLMs and memory
-llm_generator = OpenAI(temperature=0)
-llm_executor = OpenAI(temperature=0)
-memory_generator = ConversationBufferMemory()
-memory_executor = ConversationBufferMemory()
+* **Prompt Engineering:**  Crafting effective prompts that provide relevant contextual information tailored to your specific domain is essential.
 
-# Define agent nodes
-def generator_node(state, agent, name):
-    result = agent.invoke(state)
-    return {
-        "messages": [result], 
-        "sender": name,
-        "research_questions": [result.content] if result.content else [],
-    }
+* **Reranking:**  Reranking can further enhance retrieval accuracy by prioritizing the most relevant chunks from the initial retrieval process.  Anthropic utilizes the Cohere reranker, but other options are available.
 
-def executor_node(state, agent, name):
-    result = agent.invoke(state)
-    return {
-        "messages": [result], 
-        "sender": name,
-        "results": result.content,
-    }
+## Cost and Latency Considerations
 
-# Create the agents
-generator_agent = ConversationChain(llm=llm_generator, memory=memory_generator)
-executor_agent = ConversationChain(llm=llm_executor, memory=memory_executor)
-
-# Define the graph
-graph = StateGraph(initial_state={"messages": [], "research_questions": [], "results": []})
-
-# Add agent nodes
-graph.add_node("generator", AgentNode(generator_node, agent=generator_agent, name="generator"))
-graph.add_node("executor", AgentNode(executor_node, agent=executor_agent, name="executor"))
-
-# Add a tool node for information retrieval (e.g., a search tool)
-graph.add_node("search", ToolNode(search_tool))
-
-# Define conditional edges
-graph.add_conditional_edges(
-    "generator",
-    lambda state: len(state["research_questions"]) > 0,
-    {"research_question": "executor", "end": END},
-)
-
-graph.add_conditional_edges(
-    "executor",
-    lambda state: state["results"] is not None,
-    {"search": "search", "end": END}, 
-)
-
-# Route tool calls back to the executor
-graph.add_conditional_edges("search", lambda state: state["sender"], {"executor": "executor"})
-
-# Connect start node to the generator
-graph.add_edge(START, "generator")
-
-# Run the graph
-result = graph.run({"messages": [HumanMessage(content="What is the history of AI?")]})
-
-# Output the final state
-print(result)
-```
-
-This example showcases how LangGraph enables agents to work together, passing information between them via the graph's state. The "generator" agent produces research questions, which are then processed by the "executor." 
-
-The "search" node allows the "executor" to utilize a search tool. The graph cycles through these agents, enriching the state until all questions are answered. 
-
-
-## Advantages of LangGraph
-
-LangGraph offers several key advantages for building resilient and effective language agents:
-
-* **Advanced Workflows:** LangGraph supports complex, cyclic workflows, essential for sophisticated agent architectures.
-* **Fine-Grained Control:** It provides precise control over the execution flow and state, enabling developers to build robust and reliable agents.
-* **Persistence:**  Its built-in persistence allows for advanced memory capabilities and human-in-the-loop features, enhancing agent interactions. 
-* **Scalability:** LangGraph can be easily scaled to handle large and complex multi-agent systems, making it suitable for real-world applications.
+While Contextual Retrieval offers significant performance gains, it's important to consider its impact on latency and cost.  The added step of generating and embedding contextual information can increase processing time.  Prompt caching, however, significantly mitigates this issue by reducing repetitive processing, making Contextual Retrieval more cost-effective for large knowledge bases.
 
 ## Future Directions
 
-The field of language agents is rapidly evolving.  Here are some potential future directions for LangGraph:
+Contextual Retrieval represents a promising approach to improving retrieval accuracy in RAG systems.  Future research directions include:
 
-* **Integration with Other AI Tools:**  Exploring integration with other AI tools, such as reasoning engines, knowledge graphs, and planning systems, to augment agent capabilities.
-* **Enhanced Observability and Debugging:**  Improving observability and debugging tools to facilitate the development and deployment of large, complex agent systems.
-* **Standardized Agent Architectures:** Defining standard agent architectures to promote interoperability and reusability across different domains and applications. 
+* **Advanced Contextualization Techniques:** Exploring more sophisticated methods for generating and integrating contextual information.
+
+* **Integration with Other Retrieval Techniques:** Combining Contextual Retrieval with other retrieval approaches like graph-based methods or query refinement techniques.
+
+* **Evaluation on Diverse Datasets:**  Conducting thorough evaluations across a broader range of knowledge domains and retrieval tasks to validate the generalizability of Contextual Retrieval.
 
 ## Conclusion
 
-LangGraph provides a powerful and flexible framework for building sophisticated and robust language agents. Its support for cycles, fine-grained control, persistence, and scalability makes it a compelling choice for building next-generation AI applications.
+Contextual Retrieval is a powerful technique for enhancing RAG systems by addressing the critical challenge of context loss.  Anthropic's innovation provides a valuable tool for developers building AI applications that rely on knowledge bases, enabling more accurate, context-aware, and effective interactions.  By embracing Contextual Retrieval, we move closer to AI systems that not only access information but truly understand its meaning and relevance.
 
-**Citations:**
+## Citations
 
-1. LangChain Documentation: [https://langchain.readthedocs.io/en/latest/](https://langchain.readthedocs.io/en/latest/)
-2. LangGraph Documentation: [https://langchain-ai.github.io/langgraph/](https://langchain-ai.github.io/langgraph/)
-3. LangGraph GitHub Repository: [https://github.com/langchain-ai/langgraph](https://github.com/langchain-ai/langgraph)
-4. Pregel: [https://en.wikipedia.org/wiki/Pregel](https://en.wikipedia.org/wiki/Pregel)
-5. Apache Beam: [https://beam.apache.org/](https://beam.apache.org/)
-6. NetworkX: [https://networkx.org/](https://networkx.org/)
-7. STORM: [https://arxiv.org/abs/2305.11284](https://arxiv.org/abs/2305.11284)
-
-
+1. [Anthropic's Blog Post on Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval)
+2. [MTEB: Embeddings Benchmark](https://github.com/embeddings-benchmark/mteb)
+3. [Groq Open Weight Models](https://groq.com/)
+4. [NotebookLM](https://notebook.ai/)
+5. [RAGAS: RAG Assessment Tool](https://docs.ragas.io/en/stable/)
+6. [RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval](https://arxiv.org/abs/2401.18059)
+7. [SelfRAG: Self-Reflective Retrieval-Augmented Generation](https://selfrag.github.io/)
+8. [Agentic RAG: Agentic Retrieval-Augmented Generation](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph-rag/)
+9. [GraphRAG: Graph Retrieval-Augmented Generation](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-the-power-of-knowledge-graphs-for-retrieval-augmented-generation/)
