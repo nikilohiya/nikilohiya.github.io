@@ -1,6 +1,6 @@
 ---
-title: "Scaling AI-Powered Customer Support with a RAG-Based Chatbot"
-layout: post
+title: "Scaling AI-Powered Support for field professionals with a RAG-Based Chatbot"
+layout: "posts"
 date: 2025-03-01
 categories: [Case Study, AI, Product Management]
 tags: [AI, RAG, Customer Support, AWS, LLM]
